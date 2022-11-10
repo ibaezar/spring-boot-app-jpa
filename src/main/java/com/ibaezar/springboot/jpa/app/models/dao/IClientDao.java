@@ -10,4 +10,5 @@ public interface IClientDao {
 	
 	public void save(Client client);
 	
+	public Client getById(Long id);
 }

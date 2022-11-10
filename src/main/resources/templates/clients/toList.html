@@ -16,7 +16,7 @@
 		<h2 th:text="${subTitle}"></h2>
 		<h2>********************************</h2>
 		<span th:if="${clients.size() <= 0}">No se registran clientes en la base de datos</span>
-		<table th:if="${clients.size() > 0}">
+		<table th:if="${clients.size() > 0}" class="table table-striped">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -24,6 +24,7 @@
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Registrado el</th>
+					<th>Editar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +34,7 @@
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
+					<td><a th:href="@{/clientes/form/} + ${client.id}">Editar</a></td>
 				</tr>
 			</tbody>
 		</table>
