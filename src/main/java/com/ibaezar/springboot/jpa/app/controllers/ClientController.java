@@ -1,8 +1,11 @@
 package com.ibaezar.springboot.jpa.app.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,13 @@ public class ClientController {
 	}
 	
 	@PostMapping("/form")
-	public String save(Client client) {
+	public String save(@Valid Client client, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("title", "Formulario de clientes");
+			model.addAttribute("subTitle", "Registrar un nuevo cliente");
+			return "clients/create";
+		}
+		
 		clienteDao.save(client);
 		return "redirect:/clientes/listar";
 	}

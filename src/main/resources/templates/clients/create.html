@@ -19,15 +19,18 @@
 		<form th:action="@{/clientes/form}" th:object="${client}" method="post">
 			<div class="form-group">
 				<label class="col-form-label" for="name">Nombre</label>
-				<input type="text" th:field="*{name}" class="form-control" id="name" />
+				<input type="text" th:field="*{name}" class="form-control" id="name" th:errorclass="'is-invalid'" />
+				<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 			</div>
 			<div class="form-group">
 				<label class="col-form-label" for="lastname">Apellido</label>
-				<input type="text" th:field="*{lastname}" class="form-control" id="lastname" />
+				<input type="text" th:field="*{lastname}" class="form-control" id="lastname" th:errorclass="'is-invalid'" />
+				<div class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
 			</div>
 			<div class="form-group">
 				<label class="col-form-label" for="email">Email</label>
-				<input type="email" th:field="*{email}" class="form-control" id="email" />
+				<input type="email" th:field="*{email}" class="form-control" id="email" th:errorclass="'is-invalid'" />
+				<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Guardar</button>
