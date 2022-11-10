@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title th:text="${title}"></title>
+</head>
+
+<body>
+	<div class="container">
+		<h1 th:text="${title}"></h1>
+		<hr>
+		<h2 th:text="${subTitle}"></h2>
+		<h2>********************************</h2>
+
+		<form th:action="@{/clientes/form}" th:object="${client}" method="post">
+			<div class="form-group">
+				<label class="col-form-label" for="name">Nombre</label>
+				<input type="text" th:field="*{name}" class="form-control" id="name" />
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="lastname">Apellido</label>
+				<input type="text" th:field="*{lastname}" class="form-control" id="lastname" />
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="email">Email</label>
+				<input type="email" th:field="*{email}" class="form-control" id="email" />
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

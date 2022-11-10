@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title th:text="${title}"></title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title th:text="${title}"></title>
 </head>
+
 <body>
-    <h1 th:text="${title}"></h1>
-    <hr>
-    <h2 th:text="${subTitle}"></h2>
-    <h2>********************************</h2>
-    <span th:if="${clients.size() <= 0}">No se registran clientes en la base de datos</span>
-    <table th:if="${clients.size() > 0}">
-    	<thead>
-    		<tr>
-    			<th>Id</th>
-    			<th>Nombre</th>
-    			<th>Apellido</th>
-    			<th>Email</th>
-    			<th>Registrado el</th>
-    		</tr>
-    	</thead>
-    	<tbody>
-    		<tr th:each="client: ${clients}">
-    			<td th:text="${client.id}"></td>
-    			<td th:text="${client.name}"></td>
-    			<td th:text="${client.lastname}"></td>
-    			<td th:text="${client.email}"></td>
-    			<td th:text="${client.createdAt}"></td>
-    		</tr>
-    	</tbody>
-    </table>
+	<div class="container">
+		<h1 th:text="${title}"></h1>
+		<hr>
+		<h2 th:text="${subTitle}"></h2>
+		<h2>********************************</h2>
+		<span th:if="${clients.size() <= 0}">No se registran clientes en la base de datos</span>
+		<table th:if="${clients.size() > 0}">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th>Registrado el</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="client: ${clients}">
+					<td th:text="${client.id}"></td>
+					<td th:text="${client.name}"></td>
+					<td th:text="${client.lastname}"></td>
+					<td th:text="${client.email}"></td>
+					<td th:text="${client.createdAt}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
+
 </html>
