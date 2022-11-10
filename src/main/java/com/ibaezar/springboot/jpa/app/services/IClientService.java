@@ -1,10 +1,10 @@
-package com.ibaezar.springboot.jpa.app.models.dao;
+package com.ibaezar.springboot.jpa.app.services;
 
 import java.util.List;
 
 import com.ibaezar.springboot.jpa.app.models.entities.Client;
 
-public interface IClientDao {
+public interface IClientService {
 	
 	public List<Client> getAll();
 	

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.ibaezar.springboot.jpa.app.models.dao.IClientDao;
 import com.ibaezar.springboot.jpa.app.models.entities.Client;
+import com.ibaezar.springboot.jpa.app.services.IClientService;
 
 @Controller
 @SessionAttributes("client")
@@ -22,13 +22,13 @@ import com.ibaezar.springboot.jpa.app.models.entities.Client;
 public class ClientController {
 	
 	@Autowired
-	private IClientDao clienteDao;
+	private IClientService clienteService;
 	
 	@GetMapping("/listar")
 	public String getAll(Model model) {
 		model.addAttribute("title", "Listado de clientes");
 		model.addAttribute("subTitle", "Clientes encontrados");
-		model.addAttribute("clients", clienteDao.getAll());
+		model.addAttribute("clients", clienteService.getAll());
 		return "clients/toList";
 	}
 	
@@ -48,7 +48,7 @@ public class ClientController {
 			model.addAttribute("subTitle", "Registrar un nuevo cliente");
 			return "clients/create";
 		}
-		clienteDao.save(client);
+		clienteService.save(client);
 		sStatus.setComplete();
 		return "redirect:/clientes/listar";
 	}
@@ -59,11 +59,19 @@ public class ClientController {
 		model.addAttribute("subTitle", "Editar datos del cliente");
 		Client client = null;
 		if(id > 0) {
-			client = clienteDao.getById(id);
+			client = clienteService.getById(id);
 			model.addAttribute("client", client);
 		}else {
 			return "redirect:/clientes/listar";
 		}
 		return "clients/create";
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String delete(@PathVariable(value="id") Long id, Model model) {
+		if(id > 0) {
+			clienteService.delete(id);
+		}
+		return "redirect:/clientes/listar";
 	}
 }

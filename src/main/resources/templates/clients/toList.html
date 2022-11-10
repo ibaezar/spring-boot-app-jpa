@@ -25,6 +25,7 @@
 					<th>Email</th>
 					<th>Registrado el</th>
 					<th>Editar</th>
+					<th>Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,7 +35,8 @@
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
-					<td><a th:href="@{/clientes/form/} + ${client.id}">Editar</a></td>
+					<td><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-xs">Editar</a></td>
+					<td><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-xs">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>
