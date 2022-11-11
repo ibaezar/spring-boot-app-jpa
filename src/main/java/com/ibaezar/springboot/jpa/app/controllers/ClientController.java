@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ibaezar.springboot.jpa.app.models.entities.Client;
 import com.ibaezar.springboot.jpa.app.services.IClientService;
@@ -42,35 +43,42 @@ public class ClientController {
 	}
 	
 	@PostMapping("/form")
-	public String save(@Valid Client client, BindingResult result, Model model, SessionStatus sStatus) {
+	public String save(@Valid Client client, BindingResult result, RedirectAttributes msg, Model model, SessionStatus sStatus) {
 		if(result.hasErrors()) {
 			model.addAttribute("title", "Formulario de clientes");
 			model.addAttribute("subTitle", "Registrar un nuevo cliente");
 			return "clients/create";
 		}
 		clienteService.save(client);
+		msg.addFlashAttribute("success", "El cliente ha sido registrado correctamente");
 		sStatus.setComplete();
 		return "redirect:/clientes/listar";
 	}
 	
 	@GetMapping("/form/{id}")
-	public String update(@PathVariable(value="id") Long id, Model model) {
+	public String update(@PathVariable(value="id") Long id, RedirectAttributes msg, Model model) {
 		model.addAttribute("title", "Formulario de clientes");
 		model.addAttribute("subTitle", "Editar datos del cliente");
 		Client client = null;
 		if(id > 0) {
 			client = clienteService.getById(id);
-			model.addAttribute("client", client);
+			if(client == null) {
+				msg.addFlashAttribute("error", "El cliente no existe en la base de datos");
+				return "redirect:/clientes/listar";
+			}
 		}else {
+			msg.addFlashAttribute("error", "El cliente no existe en la base de datos");
 			return "redirect:/clientes/listar";
 		}
+		model.addAttribute("client", client);
 		return "clients/create";
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String delete(@PathVariable(value="id") Long id, Model model) {
+	public String delete(@PathVariable(value="id") Long id, RedirectAttributes msg, Model model) {
 		if(id > 0) {
 			clienteService.delete(id);
+			msg.addFlashAttribute("success", "El cliente ha sido eliminado correctamente");
 		}
 		return "redirect:/clientes/listar";
 	}
