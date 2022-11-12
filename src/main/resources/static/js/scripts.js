@@ -1,3 +1,8 @@
+//Mostrar año actual
+var year = new Date().getFullYear();
+var date = document.getElementById("year");
+date.innerHTML = year;
+
 const showAlert = (title, text, icon) => {		
 	Swal.fire({
 	  title: title,

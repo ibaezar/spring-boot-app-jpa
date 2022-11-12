@@ -29,6 +29,7 @@ public class ClientController {
 	public String getAll(Model model) {
 		model.addAttribute("title", "Listado de clientes");
 		model.addAttribute("subTitle", "Clientes encontrados");
+		model.addAttribute("link", "listar");
 		model.addAttribute("clients", clienteService.getAll());
 		return "clients/toList";
 	}
@@ -38,6 +39,7 @@ public class ClientController {
 		Client client = new Client();
 		model.addAttribute("title", "Formulario de clientes");
 		model.addAttribute("subTitle", "Registrar un nuevo cliente");
+		model.addAttribute("link", "crear");
 		model.addAttribute("client", client);
 		return "clients/create";
 	}
@@ -50,7 +52,7 @@ public class ClientController {
 			return "clients/create";
 		}
 		clienteService.save(client);
-		msg.addFlashAttribute("success", "El cliente ha sido registrado correctamente");
+		msg.addFlashAttribute("success", "El cliente ha sido guardado correctamente");
 		sStatus.setComplete();
 		return "redirect:/clientes/listar";
 	}
