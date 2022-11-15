@@ -1,16 +1,19 @@
 package com.ibaezar.springboot.jpa.app.models.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import com.ibaezar.springboot.jpa.app.models.entities.Client;
+//import java.util.List;
 
-public interface IClientDao {
+public interface IClientDao extends CrudRepository<Client, Long>{
 	
-	public List<Client> getAll();
+	// TODO: Comentamos este codigo para usar la interfaz CrudRepository.
+
+	// public List<Client> getAll();
 	
-	public void save(Client client);
+	// public void save(Client client);
 	
-	public Client getById(Long id);
+	// public Client getById(Long id);
 	
-	public void delete(Long id);
+	// public void delete(Long id);
 }

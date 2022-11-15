@@ -1,3 +1,7 @@
+// ! Esta clase ha sido deshabilidara para el uso de la interfaz CrudRepository
+
+/*
+
 package com.ibaezar.springboot.jpa.app.models.dao;
 
 import java.util.List;
@@ -41,3 +45,5 @@ public class ClientDaoImpl implements IClientDao{
 	}
 
 }
+
+*/

@@ -18,13 +18,13 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Client> getAll() {
-		return clientDao.getAll();
+		return (List<Client>) clientDao.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Client getById(Long id) {
-		return clientDao.getById(id);
+		return clientDao.findById(id).orElse(null);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		clientDao.delete(id);
+		clientDao.deleteById(id);
 	}
 
 }
