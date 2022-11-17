@@ -37,6 +37,10 @@ header .logo{
     height: 100%;
 }
 
+.custom-file-label::after{
+    content: "Seleccionar" !important;
+}
+
 /*FOOTER*/
 
 footer{

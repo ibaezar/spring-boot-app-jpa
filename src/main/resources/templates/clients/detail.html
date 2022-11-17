@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<span class="success" style="Display:none" th:if="${success != null}" id="alert" th:text="${success}"></span>
+		<span class="error" style="Display:none" th:if="${error != null}" id="alert" th:text="${error}"></span>
+		<h1 th:text="${title}"></h1>
+		<hr>
+		<h2 th:text="${subTitle}"></h2>
+		<h2>********************************</h2>
+
+		<div class="card mb-3" style="max-width: 540px; margin: 0 auto;">
+			<div class="row no-gutters">
+				<div class="col-md-4">
+					<img th:if="${#strings.length(client.photo) > 0}" th:src="@{'/uploads/' + ${client.photo}}" class="card-img" th:alt="${client.name}">
+					<img th:if="${#strings.length(client.photo) == 0}" th:src="@{/img/without_picture.jpg}" class="card-img" alt="">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${client.name + ' ' + client.lastname}"></h5>
+						<p class="card-text" th:text="${client.email}"></p>
+						<p class="card-text"><small class="text-muted" th:text="'registrado el ' + ${client.createdAt}"></small></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section th:replace="layout/layout :: message"></section>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

@@ -29,7 +29,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="client: ${clients}">
-					<td th:text="${client.id}"></td>
+					<td><a th:href="@{/clientes/detalle/} + ${client.id}" class="btn btn-info btn-sm" th:text="${client.id}"></a></td>
 					<td th:text="${client.name}"></td>
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>

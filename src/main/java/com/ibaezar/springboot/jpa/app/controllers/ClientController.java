@@ -1,5 +1,11 @@
 package com.ibaezar.springboot.jpa.app.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ibaezar.springboot.jpa.app.models.entities.Client;
@@ -29,6 +36,22 @@ public class ClientController {
 	
 	@Autowired
 	private IClientService clienteService;
+
+	@GetMapping(value="/detalle/{id}")
+	public String detail(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes msg){
+		
+		Client client = clienteService.getById(id);
+		if(client == null){
+			msg.addFlashAttribute("error", "El cliente no existe en la base de datos");
+			return "redirect:/clientes/listar";
+		}
+
+		model.put("client", client);
+		model.put("title", "Detalle de clientes");
+		model.put("subTitle", "Cliente: " + client.getName());
+		
+		return "clients/detail";
+	}
 	
 	@GetMapping("/listar")
 	public String getAll(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -58,12 +81,40 @@ public class ClientController {
 	}
 	
 	@PostMapping("/form")
-	public String save(@Valid Client client, BindingResult result, RedirectAttributes msg, Model model, SessionStatus sStatus) {
+	public String save(@Valid Client client, BindingResult result, RedirectAttributes msg, Model model, @RequestParam("file") MultipartFile photo, SessionStatus sStatus) {
 		if(result.hasErrors()) {
 			model.addAttribute("title", "Formulario de clientes");
 			model.addAttribute("subTitle", "Registrar un nuevo cliente");
 			return "clients/create";
 		}
+
+		if(!photo.isEmpty()){
+			/*
+			TODO -> Esta configuración es para guardar las imagenes dentro del proyecto (NO RECOMENDADO)
+			
+			Path myDirectory = Paths.get("src//main//resources//static//uploads");
+			String rootPath = myDirectory.toFile().getAbsolutePath();
+			*/
+
+			//TODO -> confifurar directorio externo (En el controlador y una clase config).
+			String rootPath = "C://java//temp//uploads";
+
+			//? -> En el caso de una ruta para linux sería EJ:
+			//String rootPath = "/opt/java/temp/uploads";
+
+			try {
+				byte[] bytes = photo.getBytes();
+				Path pathComplete = Paths.get(rootPath + "//" + photo.getOriginalFilename());
+				Files.write(pathComplete, bytes);
+				msg.addFlashAttribute("success", "Imagen subida correctamente");
+
+				client.setPhoto(photo.getOriginalFilename());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		clienteService.save(client);
 		msg.addFlashAttribute("success", "El cliente ha sido guardado correctamente");
 		sStatus.setComplete();

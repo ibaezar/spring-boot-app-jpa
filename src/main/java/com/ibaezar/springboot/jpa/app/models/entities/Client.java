@@ -40,6 +40,8 @@ public class Client implements Serializable {
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
+
+	private String photo;
 	
 	@PrePersist
 	private void prePersist() {
@@ -85,4 +87,14 @@ public class Client implements Serializable {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	
 }

@@ -20,3 +20,6 @@ if(document.getElementById("alert")){
 		showAlert("Oops...", obj.innerText, obj.className);
 	}
 }
+
+//Mostrar archivo seleccionado en inputs tipo file
+bsCustomFileInput.init()

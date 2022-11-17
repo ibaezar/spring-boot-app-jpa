@@ -12,7 +12,7 @@
 		<h2 th:text="${subTitle}"></h2>
 		<h2>********************************</h2>
 
-		<form th:action="@{/clientes/form}" th:object="${client}" method="post">
+		<form th:action="@{/clientes/form}" th:object="${client}" method="post" enctype="multipart/form-data" style="max-width: 600px; padding: 20px;" class="card">
 			<div class="form-group">
 				<label class="col-form-label" for="name">Nombre</label>
 				<input type="text" th:field="*{name}" class="form-control" id="name" th:errorclass="'is-invalid'" />
@@ -28,6 +28,18 @@
 				<label class="col-form-label" for="email">Email</label>
 				<input type="email" th:field="*{email}" class="form-control" id="email" th:errorclass="'is-invalid'" />
 				<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			</div>
+			<br>
+			<div class="form-group">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+					  <span class="input-group-text" id="inputGroupFileAddon01">Subir imagen</span>
+					</div>
+					<div class="custom-file">
+					  <input type="file" name="file" class="custom-file-input" id="file" accept="image/*" aria-describedby="inputGroupFileAddon01">
+					  <label class="custom-file-label" for="file"></label>
+					</div>
+				  </div>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Guardar</button>
