@@ -1,13 +1,18 @@
 package com.ibaezar.springboot.jpa.app.models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,8 +46,15 @@ public class Client implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 
+	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Bill> bills;
+
 	private String photo;
-	
+
+	public Client() {
+		bills = new ArrayList<Bill>();
+	}
+
 	@PrePersist
 	private void prePersist() {
 		createdAt = new Date();
@@ -96,5 +108,15 @@ public class Client implements Serializable {
 		this.photo = photo;
 	}
 
-	
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public void addBill(Bill bill){
+		bills.add(bill);
+	}
 }
