@@ -47,12 +47,12 @@ public class Client implements Serializable {
 	private Date createdAt;
 
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Bill> bills;
+	private List<Invoice> invoices;
 
 	private String photo;
 
 	public Client() {
-		bills = new ArrayList<Bill>();
+		invoices = new ArrayList<Invoice>();
 	}
 
 	@PrePersist
@@ -108,15 +108,15 @@ public class Client implements Serializable {
 		this.photo = photo;
 	}
 
-	public List<Bill> getBills() {
-		return bills;
+	public List<Invoice> getInvoices() {
+		return invoices;
 	}
 
-	public void setBills(List<Bill> bills) {
-		this.bills = bills;
+	public void setInvoices(List<Invoice> invoices) {
+		this.invoices = invoices;
 	}
 
-	public void addBill(Bill bill){
-		bills.add(bill);
+	public void addInvoices(Invoice invoice){
+		invoices.add(invoice);
 	}
 }

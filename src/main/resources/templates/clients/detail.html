@@ -29,6 +29,30 @@
 				</div>
 			</div>
 		</div>
+		<div class="card">
+			<span th:if="${#lists.isEmpty(client.invoices)}" 
+			class="alert alert-info mb-0" 
+			th:text="'No hay facturas asignadas para el cliente ' + ${client.name} + ' ' + ${client.lastname}">
+			</span>
+			<table class="table table-striped" th:if="${not #lists.isEmpty(client.invoices)}">
+				<thead>
+					<tr>
+						<th>Folio</th>
+						<th>Descripción</th>
+						<th>Fecha</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="invoice: ${client.invoices}">
+						<td th:text="${invoice.id}"></td>
+						<td th:text="${invoice.description}"></td>
+						<td th:text="${invoice.createdAt}"></td>
+						<td th:text="'$' + ${invoice.total}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 		<section th:replace="layout/layout :: message"></section>
 	</div>
