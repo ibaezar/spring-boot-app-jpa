@@ -42,5 +42,11 @@ public class InvoiceItem implements Serializable{
     public Double calculateAmount(){
         return quantity.doubleValue() * product.getAmount(); 
     }
+    public Product getProduct() {
+        return product;
+    }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
     
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<h1 th:text="${title}"></h1>
+		<hr>
+		<h2 th:text="${subTitle}"></h2>
+		<h2>********************************</h2>
+
+		<form th:action="@{/facturas/form}" th:object="${invoice}" method="post" style="max-width: 600px; padding: 20px;" class="card">
+			<div class="form-group">
+				<label class="col-form-label" th:text="Cliente"></label>
+				<input th:value="${invoice.client.name} + ' ' + ${invoice.client.lastname}" class="form-control" disabled="disabled" />
+			</div>
+            <div class="form-group">
+				<label class="col-form-label" for="description">Descripción</label>
+				<input type="text" th:field="*{description}" class="form-control" id="description" th:errorclass="'is-invalid'" />
+				<div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="observation">Observación</label>
+				<textarea type="text" th:field="*{observation}" class="form-control" id="observation"
+					th:errorclass="'is-invalid'" ></textarea>
+				<div class="text-danger" th:if="${#fields.hasErrors('observation')}" th:errors="*{observation}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="search_product">Productos</label>
+				<input type="text" class="form-control" id="search_product" name="search_product" />
+			</div>
+			<table th:replace="invoices/items-templates :: itemsInvoice"></table>
+			<table id="loadProductItems" class="table table-sm table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+			<h5>Total <span class="badge badge-secondary" id="gran_total">$ 0</span></h5>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</form>
+		
+		<section th:replace="layout/layout :: message"></section>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

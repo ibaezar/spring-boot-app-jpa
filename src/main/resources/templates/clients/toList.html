@@ -7,8 +7,6 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container">
-		<span class="success" style="Display:none" th:if="${success != null}" id="alert" th:text="${success}"></span>
-		<span class="error" style="Display:none" th:if="${error != null}" id="alert" th:text="${error}"></span>
 		<h1 th:text="${title}"></h1>
 		<hr>
 		<h2 th:text="${subTitle}"></h2>
@@ -23,6 +21,7 @@
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Registrado el</th>
+					<th>Crear Factura</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -34,6 +33,7 @@
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
+					<td><a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-primary btn-sm">Crear Factura</a></td>
 					<td><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-sm">Editar</a></td>
 					<td><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-sm">Eliminar</a>
 					</td>
