@@ -23,6 +23,8 @@
 						<h5 class="card-title" th:text="${client.name + ' ' + client.lastname}"></h5>
 						<p class="card-text" th:text="${client.email}"></p>
 						<p class="card-text"><small class="text-muted" th:text="'registrado el ' + ${client.createdAt}"></small></p>
+						<a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-success" th:text="'Crear Factura'"></a>
+						<a th:href="@{/clientes/listar/}" class="btn btn-secondary" th:text="'Volver'"></a>
 					</div>
 				</div>
 			</div>

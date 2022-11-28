@@ -50,6 +50,7 @@
 			<h5>Total <span class="badge badge-secondary" id="gran_total">$ 0</span></h5>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Guardar</button>
+				<a th:href="@{'/clientes/detalle/' + ${invoice.client.id}}" class="btn btn-secondary">Volver</a>
 			</div>
 		</form>
 		
