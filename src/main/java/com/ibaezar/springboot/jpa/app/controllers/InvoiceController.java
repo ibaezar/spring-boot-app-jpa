@@ -128,10 +128,10 @@ public class InvoiceController {
         if(invoice != null){
             clientService.deleteInvoice(id);
             msg.addFlashAttribute("success", "Factura eliminada con éxito");
+            return "redirect:/clientes/detalle/" + invoice.getClient().getId();
         }else{
             msg.addFlashAttribute("error", "Factura no existe en la base de datos");
+            return "redirect:/clientes/listar/";
         }
-        
-        return "redirect:/clientes/detalle/" + invoice.getClient().getId();
     }
 }
