@@ -40,7 +40,12 @@ public class ClientController {
 	@GetMapping(value="/detalle/{id}")
 	public String detail(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes msg){
 		
-		Client client = clienteService.getById(id);
+		//? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+		//Client client = clienteService.getById(id);
+
+		//? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+		Client client = clienteService.fetchByIdWithInvoices(id);
+
 		if(client == null){
 			msg.addFlashAttribute("error", "El cliente no existe en la base de datos");
 			return "redirect:/clientes/listar";

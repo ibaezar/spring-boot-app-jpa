@@ -18,6 +18,9 @@ public interface IClientService {
 	public void save(Client client);
 	
 	public Client getById(Long id);
+
+	//? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+	public Client fetchByIdWithInvoices(Long id);
 	
 	public void delete(Long id);
 
@@ -28,6 +31,8 @@ public interface IClientService {
 	public Product findProductById(long id);
 
 	public Invoice findInvoiceById(Long id);
+
+	public Invoice fetchByIdWithClientWithInvoiceItemsWithProduct(Long id);
 
 	public void deleteInvoice(Long id);
 }

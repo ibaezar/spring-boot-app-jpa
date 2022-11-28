@@ -39,6 +39,13 @@ public class ClientServiceImpl implements IClientService {
 		return clientDao.findById(id).orElse(null);
 	}
 
+	//? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+	@Override
+	@Transactional(readOnly = true)
+	public Client fetchByIdWithInvoices(Long id) {
+		return clientDao.fetchByIdWithInvoices(id);
+	}
+
 	@Override
 	@Transactional
 	public void save(Client client) {
@@ -85,6 +92,12 @@ public class ClientServiceImpl implements IClientService {
 	@Transactional(readOnly = true)
 	public Invoice findInvoiceById(Long id) {
 		return invoiceDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Invoice fetchByIdWithClientWithInvoiceItemsWithProduct(Long id) {
+		return invoiceDao.fetchByIdWithClientWithInvoiceItemsWithProduct(id);
 	}
 
 	@Override

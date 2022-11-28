@@ -40,7 +40,11 @@ public class InvoiceController {
     @GetMapping("/detalle/{id}")
     public String detail(@PathVariable(value = "id") Long id, Model model, RedirectAttributes msg){
 
-        Invoice invoice = clientService.findInvoiceById(id);
+        //? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+        //Invoice invoice = clientService.findInvoiceById(id);
+
+        //? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
+        Invoice invoice = clientService.fetchByIdWithClientWithInvoiceItemsWithProduct(id);
 
         if(invoice == null){
             msg.addFlashAttribute("error", "La factura no existe en la base de datos");
