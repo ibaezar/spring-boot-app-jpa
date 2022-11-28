@@ -31,7 +31,7 @@ import com.ibaezar.springboot.jpa.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("client")
-@RequestMapping("/clientes")
+@RequestMapping({"/clientes", "/"})
 public class ClientController {
 	
 	@Autowired
@@ -58,7 +58,7 @@ public class ClientController {
 		return "clients/detail";
 	}
 	
-	@GetMapping("/listar")
+	@GetMapping({"/listar", "/"})
 	public String getAll(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
