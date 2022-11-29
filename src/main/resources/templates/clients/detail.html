@@ -23,7 +23,7 @@
 						<h5 class="card-title" th:text="${client.name + ' ' + client.lastname}"></h5>
 						<p class="card-text" th:text="${client.email}"></p>
 						<p class="card-text"><small class="text-muted" th:text="'registrado el ' + ${client.createdAt}"></small></p>
-						<a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-success" th:text="'Crear Factura'"></a>
+						<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-success" th:text="'Crear Factura'"></a>
 						<a th:href="@{/clientes/listar/}" class="btn btn-secondary" th:text="'Volver'"></a>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 						<th>Fecha</th>
 						<th>Total</th>
 						<th>Ver</th>
-						<th>Eliminar</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,7 +52,7 @@
 						<td th:text="${invoice.createdAt}"></td>
 						<td th:text="'$' + ${invoice.total}"></td>
 						<td><a th:href="@{'/facturas/detalle/' + ${invoice.id}}" class="btn btn-info btn-sm">Detalle</a></td>
-						<td><a th:href="@{'/facturas/eliminar/' + ${invoice.id}}" class="btn btn-danger btn-sm">Eliminar</a></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/facturas/eliminar/' + ${invoice.id}}" class="btn btn-danger btn-sm">Eliminar</a></td>
 					</tr>
 				</tbody>
 			</table>

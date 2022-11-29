@@ -19,7 +19,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand logo" href="#"><span id="logo">{ib}</span>SpringBoot App</a>
+			<a class="navbar-brand logo" th:href="@{/clientes/listar}"><span id="logo">{ib}</span>SpringBoot App</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -28,13 +28,13 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+						<a class="nav-link" th:href="@{/clientes/listar}">Inicio <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/clientes/listar}"
 							th:classappend="${link == 'listar'} ? 'active'">Lista clientes</a>
 					</li>
-					<li class="nav-item">
+					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
 						<a class="nav-link" th:href="@{/clientes/form}"
 							th:classappend="${link == 'crear'} ? 'active'">Crear clientes</a>
 					</li>

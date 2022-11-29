@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="layout/layout :: head"></head>
 <body>
+    <header th:replace="layout/layout :: header"></header>
     <div class="container">
         <div class="card my-5 mx-auto p-5" style="max-width: 600px;">
             <form th:action="@{/login}" method="post" >

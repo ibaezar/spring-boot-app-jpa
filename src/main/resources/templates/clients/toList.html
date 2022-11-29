@@ -16,26 +16,26 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th sec:authorize="hasRole('ROLE_USER')">Id</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Registrado el</th>
-					<th>Crear Factura</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Crear Factura</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="client: ${clients}">
-					<td><a th:href="@{/clientes/detalle/} + ${client.id}" class="btn btn-info btn-sm" th:text="${client.id}"></a></td>
+					<td sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/clientes/detalle/} + ${client.id}" class="btn btn-info btn-sm" th:text="${client.id}"></a></td>
 					<td th:text="${client.name}"></td>
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
-					<td><a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-primary btn-sm">Crear Factura</a></td>
-					<td><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-sm">Editar</a></td>
-					<td><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-sm">Eliminar</a>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-primary btn-sm">Crear Factura</a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-sm">Editar</a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-sm">Eliminar</a>
 					</td>
 				</tr>
 			</tbody>
