@@ -39,6 +39,16 @@
 							th:classappend="${link == 'crear'} ? 'active'">Crear clientes</a>
 					</li>
 				</ul>
+				<ul class="dropdown navbar-nav navbar-right mx-4">
+					<a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" 
+						id="lang" data-toggle="dropdown" aria-haspopup="true" 
+						aria-expanded="false">ES
+					</a>
+					<li class="dropdown-menu dropdown-menu-right">
+						<a class="dropdown-item" th:href="@{/lenguage(lang=es_ES)}"  onclick="selected(this)">ES</a>
+						<a class="dropdown-item" th:href="@{/lenguage(lang=en_US)}"  onclick="selected(this)">EN</a>
+					</li>
+				</ul>
 				<ul class="navbar-nav navbar-right" sec:authorize="!isAuthenticated()">
 					<li><a th:href="@{/login}" class="btn btn-outline-primary" th:text="'Iniciar sesión'"></a></li>
 				</ul>

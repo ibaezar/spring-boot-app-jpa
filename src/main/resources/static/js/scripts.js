@@ -1,3 +1,13 @@
+//link lenguajes
+document.addEventListener("DOMContentLoaded",function(event){
+	var x = document.getElementById("lang");
+    x.innerHTML = localStorage.getItem("lang");
+});
+
+function selected(link){
+	localStorage.setItem("lang", link.innerText);
+}
+
 //Mostrar año actual
 var year = new Date().getFullYear();
 var date = document.getElementById("year");
