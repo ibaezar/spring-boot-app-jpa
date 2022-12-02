@@ -17,10 +17,10 @@
 			<thead>
 				<tr>
 					<th sec:authorize="hasRole('ROLE_USER')">Id</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Email</th>
-					<th>Registrado el</th>
+					<th th:text="#{text.client.name}"></th>
+					<th th:text="#{text.client.lastname}"></th>
+					<th th:text="#{text.client.email}"></th>
+					<th th:text="#{text.client.registrationDate}"></th>
 					<th sec:authorize="hasRole('ROLE_ADMIN')">Crear Factura</th>
 					<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 					<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
