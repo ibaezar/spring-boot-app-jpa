@@ -17,13 +17,13 @@
 			<thead>
 				<tr>
 					<th sec:authorize="hasRole('ROLE_USER')">Id</th>
-					<th th:text="#{text.client.name}"></th>
-					<th th:text="#{text.client.lastname}"></th>
-					<th th:text="#{text.client.email}"></th>
-					<th th:text="#{text.client.registrationDate}"></th>
-					<th sec:authorize="hasRole('ROLE_ADMIN')">Crear Factura</th>
-					<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
-					<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+					<th th:text="#{text.global.name}"></th>
+					<th th:text="#{text.global.lastname}"></th>
+					<th th:text="#{text.global.email}"></th>
+					<th th:text="#{text.global.registrationDate}"></th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.global.createInvoice}"></th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.global.update}"></th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.global.delete}"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,9 +33,9 @@
 					<td th:text="${client.lastname}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-primary btn-sm">Crear Factura</a></td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-sm">Editar</a></td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-sm">Eliminar</a>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/facturas/form/' + ${client.id}}" class="btn btn-primary btn-sm" th:text="#{text.global.createInvoice}"></a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/form/} + ${client.id}" class="btn btn-success btn-sm" th:text="#{text.global.update}"></a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/eliminar/} + ${client.id}" class="btn btn-danger btn-sm" th:text="#{text.global.delete}"></a>
 					</td>
 				</tr>
 			</tbody>

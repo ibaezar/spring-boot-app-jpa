@@ -5,8 +5,8 @@
     <header th:replace="layout/layout :: header"></header>
     <div class="container">
         <div class="card my-5 mx-auto p-5 alert alert-warning" style="max-width: 600px;">
-            <h3 class="card-title text-center">Acceso Denegado</h3>
-            <strong>Lo sentimos!</strong> No cuentas con los permisos necesarios.
+            <h3 class="card-title text-center" th:text="#{text.error.accessDenied}"></h3>
+            <strong th:text="#{text.error.wereSorry} + ' '"></strong> <p th:text="#{text.error.message}"></p>
         </div>
         <section th:replace="layout/layout :: message"></section>
     </div>
