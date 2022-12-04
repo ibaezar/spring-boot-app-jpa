@@ -1,6 +1,7 @@
 package com.ibaezar.springboot.jpa.app.controllers;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,10 +37,13 @@ public class InvoiceController {
     @Autowired
     private IClientService clientService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/detalle/{id}")
-    public String detail(@PathVariable(value = "id") Long id, Model model, RedirectAttributes msg){
+    public String detail(@PathVariable(value = "id") Long id, Model model, RedirectAttributes msg, Locale locale){
 
         //? Consulta usando fetch(inner join) para optimizar las consultas a la base de datos.
         //Invoice invoice = clientService.findInvoiceById(id);
@@ -47,13 +52,13 @@ public class InvoiceController {
         Invoice invoice = clientService.fetchByIdWithClientWithInvoiceItemsWithProduct(id);
 
         if(invoice == null){
-            msg.addFlashAttribute("error", "La factura no existe en la base de datos");
+            msg.addFlashAttribute("error", messageSource.getMessage("text.invoice.controller.error.noInvoice",null, locale));
             return "redirect:/clientes/listar";
         }
 
         model.addAttribute("invoice", invoice);
-        model.addAttribute("title", "Facturas");
-		model.addAttribute("subTitle", "Detalle de factura: ".concat(invoice.getDescription()));
+        model.addAttribute("title", messageSource.getMessage("text.invoice.controller.invoices",null, locale));
+		model.addAttribute("subTitle", messageSource.getMessage("text.invoice.controller.invoiceDetail",null, locale).concat(": ").concat(invoice.getDescription()));
 
         return "invoices/detail";
     }
@@ -61,12 +66,13 @@ public class InvoiceController {
     @GetMapping("/form/{clientId}")
     public String create(@PathVariable(value = "clientId") Long clientId, 
         Map<String, Object> model, 
-        RedirectAttributes msg){
+        RedirectAttributes msg,
+        Locale locale){
 
         Client client = clientService.getById(clientId);
 
         if(client == null){
-            msg.addFlashAttribute("error", "El cliente no existe en la base de datos");
+            msg.addFlashAttribute("error", messageSource.getMessage("text.invoice.controller.error.noInvoice",null, locale));
             return "redirect:/clientes/listar";
         }
 
@@ -74,8 +80,8 @@ public class InvoiceController {
         invoice.setClient(client);
 
         model.put("invoice", invoice);
-        model.put("title", "Registrar factura");
-		model.put("subTitle", "Registrar una nueva factura para el cliente");
+        model.put("title", messageSource.getMessage("text.invoice.controller.registerInvoice",null, locale));
+		model.put("subTitle", messageSource.getMessage("text.invoice.controller.registerNewInvoice",null, locale));
 
         return "invoices/form";
     }
@@ -92,18 +98,19 @@ public class InvoiceController {
         @RequestParam(name = "item_id[]", required = false) Long[] itemId,
         @RequestParam(name = "quantity[]", required = false) Integer[] quantity,
         RedirectAttributes msg,
-        SessionStatus sStatus){
+        SessionStatus sStatus,
+        Locale locale){
 
         if(result.hasErrors()){
-            model.addAttribute("title", "Registrar factura");
-		    model.addAttribute("subTitle", "Registrar una nueva factura para el cliente");
+            model.addAttribute("title", messageSource.getMessage("text.invoice.controller.registerInvoice",null, locale));
+		    model.addAttribute("subTitle", messageSource.getMessage("text.invoice.controller.registerNewInvoice",null, locale));
             return "invoices/form";
         }
 
         if(itemId == null || itemId.length == 0){
-            model.addAttribute("title", "Registrar factura");
-		    model.addAttribute("subTitle", "Registrar una nueva factura para el cliente");
-            model.addAttribute("error", "Las lineas de factura no pueden estár vacías");
+            model.addAttribute("title", messageSource.getMessage("text.invoice.controller.registerInvoice",null, locale));
+		    model.addAttribute("subTitle", messageSource.getMessage("text.invoice.controller.registerNewInvoice",null, locale));
+            model.addAttribute("error", messageSource.getMessage("text.invoice.controller.cannotBeEmpty",null, locale));
             return "invoices/form";
         }
         
@@ -115,26 +122,26 @@ public class InvoiceController {
             line.setProduct(product);
             invoice.addItems(line);
 
-            log.info("ID: "+ itemId[i].toString() + " cantidad: " + quantity[i].toString());
+            log.info("ID: "+ itemId[i].toString() + " " + messageSource.getMessage("text.invoice.controller.quantity",null, locale) + ": " + quantity[i].toString());
         }
 
         clientService.saveInvoice(invoice);
         sStatus.setComplete();
-        msg.addFlashAttribute("success", "Factura creada con éxito");
+        msg.addFlashAttribute("success", messageSource.getMessage("text.invoice.controller.success.registerInvoice",null, locale));
         return "redirect:/clientes/detalle/" + invoice.getClient().getId();
     }
 
     @GetMapping("/eliminar/{id}")
-    public String delete(@PathVariable(value = "id") Long id, RedirectAttributes msg){
+    public String delete(@PathVariable(value = "id") Long id, RedirectAttributes msg, Locale locale){
 
         Invoice invoice = clientService.findInvoiceById(id);
 
         if(invoice != null){
             clientService.deleteInvoice(id);
-            msg.addFlashAttribute("success", "Factura eliminada con éxito");
+            msg.addFlashAttribute("success", messageSource.getMessage("text.invoice.controller.success.deletedInvoice",null, locale));
             return "redirect:/clientes/detalle/" + invoice.getClient().getId();
         }else{
-            msg.addFlashAttribute("error", "Factura no existe en la base de datos");
+            msg.addFlashAttribute("error", messageSource.getMessage("text.invoice.controller.error.noInvoice",null, locale));
             return "redirect:/clientes/listar/";
         }
     }
