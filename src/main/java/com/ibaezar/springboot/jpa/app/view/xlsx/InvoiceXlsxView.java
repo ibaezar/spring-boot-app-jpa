@@ -23,6 +23,7 @@ import com.ibaezar.springboot.jpa.app.models.entities.InvoiceItem;
 @Component("invoices/detail.xlsx")
 public class InvoiceXlsxView extends AbstractXlsxView{
 
+    @SuppressWarnings("null")
     @Override
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
             HttpServletResponse response) throws Exception {

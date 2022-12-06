@@ -21,6 +21,7 @@ import com.lowagie.text.pdf.PdfWriter;
 @Component("invoices/detail")
 public class InvoicePdfView extends AbstractPdfView{
 
+    @SuppressWarnings("null")
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
             HttpServletRequest request, HttpServletResponse response) throws Exception {        
