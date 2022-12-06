@@ -18,7 +18,8 @@
 
                 <h4 class="card-title">
                     <a th:href="@{'/clientes/detalle/' + ${invoice.client.id}}" class="btn btn-secondary btn-sm" th:text="#{text.global.return}"></a>
-                    <a th:href="@{'/facturas/detalle/' + ${invoice.id}(format=pdf)}" class="btn btn-danger btn-sm float-right" target="_blank">PDF</a>
+                    <a th:href="@{'/facturas/detalle/' + ${invoice.id}(format=pdf)}" class="btn btn-danger btn-sm float-right mx-2" target="_blank">PDF</a>
+                    <a th:href="@{'/facturas/detalle/' + ${invoice.id}(format=xlsx)}" class="btn btn-success btn-sm float-right">Excel</a>
                 </h4>
 
                 <ul class="list-group my-2">
