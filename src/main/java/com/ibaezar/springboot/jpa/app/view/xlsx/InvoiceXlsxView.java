@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
@@ -25,15 +26,17 @@ public class InvoiceXlsxView extends AbstractXlsxView{
     @Override
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+
+        MessageSourceAccessor messages = getMessageSourceAccessor();
         
         Invoice invoice = (Invoice) model.get("invoice");
 
         //Nombrar archivo de salida
-        String nameInvoice = "attachment; filename="+'"'+"Factura_"+invoice.getClient().getName().concat("-").concat(invoice.getClient().getLastname())+".xlsx"+'"';
+        String nameInvoice = "attachment; filename="+'"'+messages.getMessage("text.global.invoice")+"_"+invoice.getClient().getName().concat("-").concat(invoice.getClient().getLastname())+".xlsx"+'"';
         response.setHeader("Content-Disposition", nameInvoice);
         
         //Nombrar pestaña
-        Sheet sheet = workbook.createSheet("Factura");
+        Sheet sheet = workbook.createSheet(messages.getMessage("text.global.invoice"));
 
         //Datos del cliente
         //Estilos
@@ -57,7 +60,7 @@ public class InvoiceXlsxView extends AbstractXlsxView{
 
         Row row = sheet.createRow(1);
         Cell cell = row.createCell(1);
-        cell.setCellValue("Datos del cliente");
+        cell.setCellValue(messages.getMessage("text.global.clientData"));
         cell.setCellStyle(theaderClient); //style
 
         row = sheet.createRow(2);
@@ -71,10 +74,10 @@ public class InvoiceXlsxView extends AbstractXlsxView{
         cell.setCellStyle(tbody);
 
         //Forma encadenando los metodos para agregar datos al documento xlsx
-        sheet.createRow(5).createCell(1).setCellValue("Datos de la factura");
-        sheet.createRow(6).createCell(1).setCellValue("Folio: " + invoice.getId());
-        sheet.createRow(7).createCell(1).setCellValue("Descripción: " + invoice.getDescription());
-        sheet.createRow(8).createCell(1).setCellValue("Fecha: " + invoice.getCreatedAt());
+        sheet.createRow(5).createCell(1).setCellValue(messages.getMessage("text.global.invoiceData"));
+        sheet.createRow(6).createCell(1).setCellValue(messages.getMessage("text.global.invoice")+": " + invoice.getId());
+        sheet.createRow(7).createCell(1).setCellValue(messages.getMessage("text.global.description")+": " + invoice.getDescription());
+        sheet.createRow(8).createCell(1).setCellValue(messages.getMessage("text.global.date")+": " + invoice.getCreatedAt());
 
         sheet.getRow(5).getCell(1).setCellStyle(theaderInvoice);
         sheet.getRow(6).getCell(1).setCellStyle(tbody);
@@ -82,10 +85,10 @@ public class InvoiceXlsxView extends AbstractXlsxView{
         sheet.getRow(8).getCell(1).setCellStyle(tbody);
 
         Row header = sheet.createRow(10);
-        header.createCell(1).setCellValue("Producto");
-        header.createCell(2).setCellValue("Precio");
-        header.createCell(3).setCellValue("Cantidad");
-        header.createCell(4).setCellValue("Total");
+        header.createCell(1).setCellValue(messages.getMessage("text.global.product"));
+        header.createCell(2).setCellValue(messages.getMessage("text.global.amount"));
+        header.createCell(3).setCellValue(messages.getMessage("text.global.quantity"));
+        header.createCell(4).setCellValue(messages.getMessage("text.global.total"));
 
         header.getCell(1).setCellStyle(theaderItems);
         header.getCell(2).setCellStyle(theaderItems);
@@ -109,7 +112,7 @@ public class InvoiceXlsxView extends AbstractXlsxView{
         }
 
         Row totalRow = sheet.createRow(rownum ++);
-        totalRow.createCell(3).setCellValue("Gran total: ");
+        totalRow.createCell(3).setCellValue(messages.getMessage("text.global.grandTotal")+": ");
         totalRow.createCell(4).setCellValue(invoice.getTotal());
 
         totalRow.getCell(3).setCellStyle(theaderClient);
@@ -118,10 +121,10 @@ public class InvoiceXlsxView extends AbstractXlsxView{
         rownum ++;
 
         Row obsRow = sheet.createRow(rownum ++);
-        obsRow.createCell(1).setCellValue("Observaciones");
+        obsRow.createCell(1).setCellValue(messages.getMessage("text.global.observations"));
         obsRow.getCell(1).setCellStyle(theaderItems);
         Row obsRowData = sheet.createRow(rownum);
-        obsRowData.createCell(1).setCellValue(invoice.getObservation() != null ? invoice.getObservation() : "Sin observaciones");
+        obsRowData.createCell(1).setCellValue(invoice.getObservation() != null ? invoice.getObservation() : messages.getMessage("text.global.noObservations"));
         obsRowData.getCell(1).setCellStyle(tbody);
 
     }
