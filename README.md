@@ -27,6 +27,7 @@ Usuario simple -> User: izhar | Pass: 123456
 * Thymeleaf
 * Java
 * Data JPA
+* Spring Security
 * H2 Database.
 * JavaScript
 * Bootstrap
@@ -35,7 +36,7 @@ Usuario simple -> User: izhar | Pass: 123456
 ## ¿Como correr esta aplicación?
 ***
 
-En primer lugar tenemos la opción de ver esta aplicación Web funcionando desde el siguiente enlace: [Spring Boot App Jpa]() 
+En primer lugar tenemos la opción de ver esta aplicación Web funcionando desde el siguiente enlace: [Spring Boot App Jpa](https://spring-boot-app-jpa.herokuapp.com/) 
 
 Otra opción es descargar este código o clonarlo con Git para tenerlo de forma local en nuestro equipo.
 
