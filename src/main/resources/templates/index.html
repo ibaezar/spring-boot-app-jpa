@@ -3,8 +3,66 @@
     <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
-    <div class="container">
-        
+    
+    <div class="index">
+        <div class="container my-0">
+    
+            <div id="presentation">
+                <p class="welcome" th:text="#{text.index.welcome}"></p>
+                <h2 th:text="#{text.index.title}"> <i class="fa-brands fa-angular"></i></h2>
+                <p class="description" th:text="#{text.index.subtitle}"></p>
+                <br>
+                <p class="text-info" th:text="#{text.index.about}"></p>
+                <p class="text-center font-weight-light" th:text="#{text.index.text1}"></p>
+                <p class="text-center font-weight-light" th:text="#{text.index.text2}"></p>
+                <br>
+                <br>
+                <a class="btn btn-outline-info btn-lg rounded-pill" href="https://github.com/ibaezar/spring-boot-app-jpa" target="_blank"><span th:text="#{text.index.button}"></span> <i class="fa-brands fa-github"></i></a>
+
+                <section id="users">
+                    <h3 class="font-weight-bold text-warning text-center" th:text="#{text.index.important}"></h3>
+                    <p class="my-3 text-center" th:text="#{text.index.info}"></p>
+                    <div class="alert alert-info"><p th:text="#{text.index.admin}"></p> -> User: admin | Pass: 123456</div>
+                    <div class="alert alert-info"><p th:text="#{text.index.user}"></p> -> User: izhar | Pass: 123456</div>
+                </section>
+                <h3 class="font-weight-bold technology-text" th:text="#{text.index.technologies}"></h3>
+                <br>
+                <section id="technologies" class="row mx-2">
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #3a7d0e">
+                        <img th:src="@{/img/technologies/springboot.png}">
+                        <p>Spring Boot</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #0ba123;">
+                        <img th:src="@{/img/technologies/thymeleaf.png}">
+                        <p>Thymeleaf</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #302a2a;">
+                        <img th:src="@{/img/technologies/java.png}">
+                        <p>Java</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #4a91c7;">
+                        <img th:src="@{/img/technologies/mysql.png}">
+                        <p>MySQL</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #963cfd;">
+                        <img th:src="@{/img/technologies/bootstrap.png}">
+                        <p>Bootstrap</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #f1d0a2;">
+                        <img th:src="@{/img/technologies/sweetalert2.png}">
+                        <p>Sweetalert2</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #ffeb3a;">
+                        <img th:src="@{/img/technologies/javascript.png}">
+                        <p>Javascript</p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 technology" style="background-color: #467af1;">
+                        <img th:src="@{/img/technologies/css3.png}">
+                        <p>CSS 3</p>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
     <footer th:replace="layout/layout :: footer"></footer>
