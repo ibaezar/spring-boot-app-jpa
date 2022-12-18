@@ -1,4 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
+
+/***************************INDEX****************************/
+.index{
+    background: linear-gradient(rgba(0,0,0, .8), rgba(0,0,0, .8)), url("./../img/technologies/code-found2.png");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+#presentation{
+    font-family: 'Montserrat';
+    font-weight: bold;
+    max-width: 1100px;
+    margin: auto;
+    padding-top: 50px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#presentation .welcome{
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+#presentation h2{
+    font-size: 55px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#presentation h2 span{
+    font-size: 25px;
+    color: #00ff7f;
+}
+
+#presentation .description{
+    max-width: 700px;
+    margin: 25px auto;
+    font-size: 18px;
+    text-align: center;
+}
+
+#technologies{
+    max-width: 1200px;
+    margin-bottom: 30px;
+}
+
+.technology-text{
+    margin-top: 20px;
+    font-family: 'Montserrat';
+}
+
+.technology{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.technology:hover{
+    z-index: 10;
+    transform: scale(1.1);
+    box-shadow: 5px 5px 10px #1a1a1a, -5px 0px 10px #1a1a1a;
+}
+
+.technology img{
+    width: 150px;
+    overflow: hidden;
+}
+
+.technology p{
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+#users{
+    border: 1px solid #17a2b8;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 50px 0;
+    backdrop-filter: blur(5px);
+}
+
+#users .alert p{
+    margin: 0;
+    display: contents;
+}
+
+@media screen and (max-width:540px) {
+    .technology:hover{
+        transform: none !important;
+    }
+}
+/************************************************************/
 
 .container{
 	margin: 20px auto;

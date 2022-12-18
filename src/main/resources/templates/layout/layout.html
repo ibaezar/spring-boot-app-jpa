@@ -19,7 +19,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand logo" th:href="@{/clientes/listar}"><span id="logo">{ib}</span>SpringBoot App</a>
+			<a class="navbar-brand logo" th:href="@{/}"><span id="logo">{ib}</span>SpringBoot App</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/clientes/listar}" th:text="#{text.layout.index}"> <span class="sr-only">(current)</span></a>
+						<a class="nav-link" th:href="@{/}" th:text="#{text.layout.index}"> <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/clientes/listar}"
@@ -50,10 +50,10 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav navbar-right" sec:authorize="!isAuthenticated()">
-					<li><a th:href="@{/login}" class="btn btn-outline-primary" th:text="#{text.layout.signIn}"></a></li>
+					<li><a th:href="@{/login}" class="btn btn-outline-info" th:text="#{text.layout.signIn}"></a></li>
 				</ul>
 				<ul sec:authorize="isAuthenticated()" class="dropdown navbar-nav navbar-right">
-					<a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" 
+					<a class="btn btn-outline-info dropdown-toggle" href="#" role="button" 
 						id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" 
 						aria-expanded="false"
 						sec:authentication="name">
@@ -83,7 +83,7 @@
 		</div>
 	</section>
 
-	<footer th:fragment="footer" class="bg-secondary">
+	<footer th:fragment="footer" class="bg-dark">
 		<div class="legend">
 			<p><span th:text="#{text.layout.developedBy} + ' '"></span><b>Izhar Baeza</b> &copy; Web Developer - <span id="year"></span></p>
 			<div id="flag" style="margin-left: 10px; margin-right: 0;">
